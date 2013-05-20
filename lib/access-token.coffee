@@ -8,7 +8,7 @@ angular.module('corespring-ng-services')
           method: 'POST'
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
           url: "#{config.url}/auth/access_token"
-          data: $.param({clientId: id, clientSecret: secret})
+          data: $.param({client_id: id, client_secret: secret})
         $http(params).success(onSuccess).error(onError)
         null
     out 
