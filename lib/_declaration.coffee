@@ -1,0 +1,1 @@
+angular.module 'corespring-ng-services', ['ngResource']
