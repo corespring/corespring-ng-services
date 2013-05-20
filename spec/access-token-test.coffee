@@ -6,8 +6,7 @@ describe 'access-token-test', ->
   prepareBackend = ($backend) -> 
 
     fn = (method, url, data) -> 
-      obj = JSON.parse(data)
-      if obj.clientId == "good"
+      if data.indexOf("clientId=good") != -1 
         [200, url, { token: "token"}]
       else
         [401, url, { error: "bad data"}]

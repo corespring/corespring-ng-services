@@ -6,10 +6,9 @@ angular.module('corespring-ng-services')
       generate: (id,secret,onSuccess,onError) ->
         params = 
           method: 'POST'
-          url: "#{config.url}/api/v1/access-token"
-          data: 
-            clientId: id
-            clientSecret: secret 
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          url: "#{config.url}/auth/access_token"
+          data: $.param({clientId: id, clientSecret: secret})
         $http(params).success(onSuccess).error(onError)
         null
     out 
