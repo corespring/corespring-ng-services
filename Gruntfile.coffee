@@ -43,5 +43,4 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-jasmine'
 
   grunt.registerTask 'default', ['clean', 'coffee', 'uglify']
-  #grunt.registerTask 'test', [ 'default', 'jasmine']
   grunt.registerTask 'test', [ 'default', 'coffee:specs', 'jasmine']
