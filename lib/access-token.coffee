@@ -1,5 +1,3 @@
-#access-token
-
 angular.module('corespring-ng-services')
   .factory(  'AccessToken', [ 'CorespringConfig', '$http', (config, $http) ->
     out =  
