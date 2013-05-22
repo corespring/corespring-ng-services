@@ -5,6 +5,7 @@ A collection of angular services for interacting with the CoresSpring platform.
 # building
 
     npm install
+    npm install -g grunt-cli      (if you haven't installed grunt yet)
     grunt
 
 # using in your project
