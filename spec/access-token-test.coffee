@@ -4,14 +4,17 @@ describe 'access-token-test', ->
   $httpBackend = null
 
   prepareBackend = ($backend) -> 
-
-    fn = (method, url, data) -> 
+    $backend.when('POST', /.access_token/).respond((method, url, data) -> 
       if data.indexOf("client_id=good") != -1 
         [200, url, { token: "token"}]
       else
-        [401, url, { error: "bad data"}]
+        [401, url, { error: "bad data"}]);
 
-    $backend.when('POST', /.*/).respond(fn);
+    $backend.when('GET', /.isvalid/).respond((method, url, data) -> 
+      if url.indexOf("token=good") != -1 
+        [200, url, { valid: "true"}]
+      else
+        [401, url, { error: "bad data"}]);
     null
 
   beforeEach ->
@@ -35,7 +38,7 @@ describe 'access-token-test', ->
     
     inject(init) 
   
-  it 'works', ->
+  it 'generate works', ->
     expect(service).toNotBe(null)
 
     successCalled = false
@@ -51,4 +54,22 @@ describe 'access-token-test', ->
     service.generate "bad", "secret", onSuccess, onError
     $httpBackend.flush()
     expect(errorCalled).toBe(true)
+
+  it 'isvalid works', ->
+    expect(service).toNotBe(null)
+
+    successCalled = false
+    errorCalled = false
+
+    onSuccess = (data) -> successCalled = true
+    onError = (data) -> errorCalled = true
+
+    service.isValid "good", onSuccess, onError
+    $httpBackend.flush()
+    expect(successCalled).toBe(true)
+
+    service.isValid "bad", onSuccess, onError
+    $httpBackend.flush()
+    expect(errorCalled).toBe(true)
+
 

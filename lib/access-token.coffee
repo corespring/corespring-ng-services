@@ -8,6 +8,12 @@ angular.module('corespring-ng-services')
           url: "#{config.url}/auth/access_token"
           data: $.param({client_id: id, client_secret: secret})
         $http(params).success(onSuccess).error(onError)
+
+      isValid: (token,onSuccess,onError) ->
+        params = 
+          params : { token: token }
+
+        $http.get("#{config.url}/auth/isvalid",params).success(onSuccess).error(onError)
         null
     out 
   ])
