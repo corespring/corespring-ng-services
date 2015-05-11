@@ -1,4 +1,4 @@
-describe('access-token-test', function() {
+describe('AccessTokene', function() {
 
   var $httpBackend, service;
 
