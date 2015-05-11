@@ -75,7 +75,7 @@ describe('access-token-test', function() {
         };
 
         expect(service).toNotBe(null);
-        service.generate("good", "secret", onSuccess, onError);
+        service.generate("good", "secret", onSuccess, function() {});
         $httpBackend.flush();
         expect(successCalled).toBe(true);
       });
@@ -91,7 +91,7 @@ describe('access-token-test', function() {
         };
 
         expect(service).toNotBe(null);
-        service.generate("bad", "secret", onSuccess, onError);
+        service.generate("bad", "secret", function() {}, onError);
         $httpBackend.flush();
         return expect(errorCalled).toBe(true);
       });
@@ -112,7 +112,7 @@ describe('access-token-test', function() {
         };
 
         expect(service).toNotBe(null);
-        service.isValid("good", onSuccess, onError);
+        service.isValid("good", onSuccess, function() {});
         $httpBackend.flush();
         expect(successCalled).toBe(true);
       });
@@ -128,7 +128,7 @@ describe('access-token-test', function() {
         };
 
         expect(service).toNotBe(null);
-        service.isValid("bad", onSuccess, onError);
+        service.isValid("bad", function() {}, onError);
         $httpBackend.flush();
         return expect(errorCalled).toBe(true);
       });
